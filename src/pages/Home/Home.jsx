@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navbar } from "../../components/Navbar";
 
 
 function Home() {
@@ -11,6 +12,8 @@ function Home() {
 
   return (
     <>
+      <Navbar/>
+
       <div className="bg-gradient-to-br from-purple-700 via-indigo-500 to-blue-500 min-h-screen flex flex-col items-center justify-center text-white font-sans">
 
       {/* Header*/}
