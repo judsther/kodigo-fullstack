@@ -9,15 +9,15 @@ Currently, two official plugins are available:
 
 DEPENDENCIAS EXTRAS:
 
-AXIOS
-RECHARTS
-REACT DATEPICKER
+- AXIOS
+- RECHARTS
+- REACT DATEPICKER
 
 
 EJECUTAR:
-npm install axios
-npm install recharts
-npm install react-datepicker  
+- npm install axios
+- npm install recharts
+- npm install react-datepicker  
 
 
 
