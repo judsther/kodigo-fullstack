@@ -1,4 +1,4 @@
-// Register.jsx
+
 import { useState } from 'react';
 import { useRegister } from '../../hooks/useRegister';
 
