@@ -6,6 +6,9 @@ import PrivateRoute from "./components/Auth/PrivateRoute";
 import { AuthProvider } from "./components/Auth/AuthContext";
 import Register from "./pages/Sessions/Register";
 import { Login } from "./pages/Sessions/Login";
+import Administration from "./pages/Admin/Administration";
+import UserForm from "./pages/Admin/UserForm";
+import EditUser from "./pages/Admin/EditUser";
 
 
 
@@ -15,17 +18,15 @@ function App() {
     <AuthProvider>
     <Router>
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-                    <Route
-                        path="/statistics"
-                        element={
-                            <PrivateRoute>
-                                <Statistics />
-                            </PrivateRoute>
-                        }
-                    />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/administration" element={<Administration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/statistics" element={<PrivateRoute><Statistics /></PrivateRoute>}/>
+
+        {/* ✅ New User Management Routes */}
+        <Route path="/admin/users/create" element={<UserForm />} />
+        <Route path="admin/users/:id" element={<EditUser />} /> {/* Edit User */}
       </Routes>
     </Router>
     </AuthProvider>
@@ -33,5 +34,6 @@ function App() {
     </>
   );
 };
+
 
 export default App;

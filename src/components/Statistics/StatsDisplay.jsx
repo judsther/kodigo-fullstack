@@ -12,7 +12,7 @@ const StatsDisplay = ({ stats, loading }) => {
 
     return (
         <div className="mt-4">
-            <h3 className="text-xl mb-2">
+            <h3 className="text-xl mb-2 text-black">
                 Total de Usuarios: {stats.total_users}
             </h3>
 
