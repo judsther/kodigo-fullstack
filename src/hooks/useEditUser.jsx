@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export const useEditUser = (token) => {
-    const { id } = useParams(); // Get the user ID from the URL
+export const useEditUser = (id) => {
     const [user, setUser] = useState({ name: "", email: "", role: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
-    console.log("token dentro de useEditUser: ", token);
+    // Fetch user data when the hook is used
     useEffect(() => {
-        if (id) fetchUser();
+        fetchUser();
     }, [id]);
 
     const fetchUser = async () => {
@@ -26,8 +26,8 @@ export const useEditUser = (token) => {
         } finally {
             setLoading(false);
         }
-    };
-
+//     };
+// console.log("useEditUser, User y token: ",user,token);
     const handleEdit = async (updatedUser) => {
         try {
             setLoading(true);
@@ -45,3 +45,4 @@ export const useEditUser = (token) => {
 
     return { user, setUser, loading, error, handleEdit };
 };
+}

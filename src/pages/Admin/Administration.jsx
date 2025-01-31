@@ -1,19 +1,17 @@
 import "./../../css/app.css";
 import { useUser } from "../../hooks/useUser";
+import { useDeleteUser } from "../../hooks/useDeleteUser";
 import ErrorMessage from "../../components/Statistics/ErrorMessage";
 import Loader from "../../components/common/Loader";
-import { useNavigate } from 'react-router-dom';
-import Button from '../../components/common/Button';
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/common/Button";
 import { Navbar } from "../../components/common/Navbar";
 
 const Administration = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const { user, loading, error } = useUser(token);
-
-  const handleClick = () => {
-    navigate('/');
-  };
+  const { user, loading, error, fetchUsers } = useUser(token);
+  const { handleDelete, loading: deleting } = useDeleteUser(fetchUsers);
 
   const renderTable = () => {
     return (
@@ -36,8 +34,19 @@ const Administration = () => {
                 <td className="py-2 px-4">{user.email}</td>
                 <td className="py-2 px-4">{user.role}</td>
                 <td className="py-2 px-4 flex space-x-2">
-                  <button onClick={() => navigate(`/admin/users/${user.id}`)} className="bg-indigo-500 hover:bg-indigo-600 text-white py-1 px-3 rounded-lg shadow">Editar</button>
-                  {/* <button  onClick={() => handleDelete(user.id)} className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-lg shadow">Eliminar</button> */}
+                  <button
+                    onClick={() => navigate(`/admin/users/${user.id}`, { state: { user } })}
+                    className="bg-indigo-500 hover:bg-indigo-600 text-white py-1 px-3 rounded-lg shadow"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(user.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-lg shadow"
+                    disabled={deleting}
+                  >
+                    {deleting ? "Eliminando..." : "Eliminar"}
+                  </button>
                 </td>
               </tr>
             ))}
@@ -59,7 +68,14 @@ const Administration = () => {
             Aquí puedes gestionar los usuarios de la plataforma.
           </p>
         </header>
-        
+
+        <Button 
+          onClick={() => navigate("/admin/users/create")} 
+          className="mb-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105"
+        >
+          ➕ Crear Nuevo Usuario
+        </Button>
+
         <section className="w-11/12 max-w-4xl bg-white bg-opacity-10 p-8 rounded-3xl shadow-2xl">
           <h2 className="text-3xl font-semibold text-center mb-6 underline decoration-wavy decoration-yellow-400">
             Estadísticas de Usuarios
@@ -67,8 +83,11 @@ const Administration = () => {
           <ErrorMessage error={error} />
           {loading ? <p><Loader /></p> : renderTable()}
         </section>
-        
-        <Button onClick={handleClick} className="mt-6 px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105">
+
+        <Button 
+          onClick={() => navigate("/")} 
+          className="mt-6 px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105"
+        >
           Atrás
         </Button>
       </div>

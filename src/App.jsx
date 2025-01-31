@@ -25,8 +25,8 @@ function App() {
         <Route path="/statistics" element={<PrivateRoute><Statistics /></PrivateRoute>}/>
 
         {/* ✅ New User Management Routes */}
-        <Route path="/users/create" element={<UserForm/>} /> {/* Create User */}
-        <Route path="/users/edit/:id" element={<EditUser />} /> {/* Edit User */}
+        <Route path="/admin/users/create" element={<UserForm />} />
+        <Route path="admin/users/:id" element={<EditUser />} /> {/* Edit User */}
       </Routes>
     </Router>
     </AuthProvider>
