@@ -42,6 +42,11 @@ export const Navbar = () => {
               Estadísticas
             </Link>
           )}
+          {token && (
+            <Link to="/administration" className="hover:text-gray-300">
+              Administracion de usuarios
+            </Link>
+          )}
           {token ? ( 
             <button
               onClick={handleLogout}
@@ -88,6 +93,11 @@ export const Navbar = () => {
                 Estadísticas
               </Link>
             )}
+                      {token && (
+            <Link to="/administration" className="hover:text-gray-300">
+              Administracion de usuarios
+            </Link>
+          )}
             {token ? ( 
               <button
                 onClick={() => {
@@ -121,8 +131,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-
-
-
-
-
