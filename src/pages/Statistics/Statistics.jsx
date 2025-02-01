@@ -36,7 +36,7 @@ const Statistics = () => {
           </p>
         </header>
   
-        <section className="w-11/12 max-w-4xl bg-white bg-opacity-10 p-8 rounded-3xl shadow-2xl">
+        <section className="w-11/12 max-w-4xl bg-white bg-opacity-10 p-8 rounded-3xl shadow-2xl text-black">
           <h2 className="text-4xl font-semibold text-center mb-6 underline decoration-wavy decoration-yellow-400">
             Seleccionar Periodo
           </h2>
@@ -47,9 +47,9 @@ const Statistics = () => {
           {period === 'daily' && (
             <DatePickerRange
               startDate={date}
-              endDate={date}
+              
               onStartDateChange={setDate}
-              onEndDateChange={setDate}
+             
             />
           )}
   

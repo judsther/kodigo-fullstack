@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -9,13 +11,13 @@ export const AuthProvider = ({ children }) => {
         return storedUser ? JSON.parse(storedUser) : null;
     });
 
-    // 🔄 Sincroniza el estado con localStorage (en caso de cambios externos)
+    // Sincroniza el estado con localStorage (en caso de cambios externos)
     useEffect(() => {
         localStorage.setItem("token", token || "");
         localStorage.setItem("user", JSON.stringify(user) || "");
     }, [token, user]);
 
-    // 🆕 Registrar usuario (si se usa en un formulario de registro)
+    //  Registrar usuario (si se usa en un formulario de registro)
     const register = async (newUser) => {
         try {
             setUser(newUser);
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // 🔑 Iniciar sesión
+    //  Iniciar sesión
     const login = (newToken, userData) => {
         localStorage.setItem("token", newToken);
         localStorage.setItem("user", JSON.stringify(userData));
@@ -34,7 +36,7 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
     };
 
-    // 🚪 Cerrar sesión
+    //  Cerrar sesión
     const logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
