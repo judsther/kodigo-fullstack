@@ -1,48 +1,41 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-export const useEditUser = (id) => {
-    const [user, setUser] = useState({ name: "", email: "", role: "" });
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { updateUser } from "../services/userService";
+
+const useEditUser = (initialUser, id, token) => {
+    const [user, setUser] = useState(initialUser);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const token = localStorage.getItem("token");
 
-    // Fetch user data when the hook is used
-    useEffect(() => {
-        fetchUser();
-    }, [id]);
+    const handleChange = (field, value) => {
+        setUser((prevUser) => ({ ...prevUser, [field]: value }));
+    };
 
-    const fetchUser = async () => {
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
         try {
-            setLoading(true);
-            const response = await axios.get(`http://127.0.0.1:8000/api/admin/edit/${id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setUser(response.data);
+            await updateUser(id, user, token);
+            alert("Usuario actualizado con éxito!");
+            navigate("/administration");
         } catch (err) {
-            setError("Error fetching user data");
-        } finally {
-            setLoading(false);
-        }
-//     };
-// console.log("useEditUser, User y token: ",user,token);
-    const handleEdit = async (updatedUser) => {
-        try {
-            setLoading(true);
-            await axios.put(`http://127.0.0.1:8000/api/admin/edit/${id}`, updatedUser, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            alert("User updated successfully!");
-            navigate("/users");
-        } catch (err) {
-            setError("Failed to update user");
+            setError(err.message);
         } finally {
             setLoading(false);
         }
     };
 
-    return { user, setUser, loading, error, handleEdit };
+    return {
+        user,
+        loading,
+        error,
+        handleChange,
+        handleUpdate
+    };
 };
-}
+
+export default useEditUser;

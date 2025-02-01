@@ -15,9 +15,10 @@ export const useDeleteUser = (fetchUsers) => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert("Usuario eliminado correctamente");
+            window.location.reload(); //<-
             await fetchUsers(); // Recargar la lista de usuarios
-        } catch (err) {
-            setError("Error al eliminar usuario");
+        } catch (error) {
+            setError("Error al eliminar usuario", error);
         } finally {
             setLoading(false);
         }

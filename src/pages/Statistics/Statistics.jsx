@@ -83,12 +83,14 @@ const Statistics = () => {
           {loading ? <Loader /> : <StatsDisplay stats={stats} />}
         </section>
   
+  <div className='mt-3'>
         <Button
           onClick={handleClick}
           className="mt-6 px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105"
         >
           Atrás
         </Button>
+        </div>
       </div>
     </>
   );

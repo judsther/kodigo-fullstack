@@ -1,23 +1,14 @@
 
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/common/Navbar";
 import Button from "../../components/common/Button";
-import useEditUser from "../../hooks/useEditUser";
-import EditUserForm from "./components/EditUserForm";
+import useCreateUser from "../../hooks/useCreateUser";
+import CreateUserForm from "./components/CreateUserForm";
 
-const EditUser = () => {
-    const { id } = useParams();
-    const { state } = useLocation();
-    const token = localStorage.getItem("token");
+const CreateUser = () => {
     const navigate = useNavigate();
 
-    const {
-        user,
-        loading,
-        error,
-        handleChange,
-        handleUpdate
-    } = useEditUser(state?.user || { name: "", email: "", role: "" }, id, token);
+    const { user, loading, error, handleChange, handleCreate } = useCreateUser();
 
     return (
         <>
@@ -25,10 +16,10 @@ const EditUser = () => {
             <div className="bg-gradient-to-br from-purple-700 via-indigo-500 to-blue-500 min-h-screen flex flex-col items-center justify-center text-white font-sans p-6">
                 <header className="text-center mb-10">
                     <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">
-                        Editar Usuario ✏️
+                        Crear Nuevo Usuario 📝
                     </h1>
                     <p className="mt-4 text-lg md:text-xl opacity-90">
-                        Modifica los detalles del usuario aquí.
+                        Completa el formulario para registrar un usuario.
                     </p>
                 </header>
 
@@ -37,10 +28,10 @@ const EditUser = () => {
                         Información del Usuario
                     </h2>
 
-                    <EditUserForm
+                    <CreateUserForm
                         user={user}
                         onChange={handleChange}
-                        onSubmit={handleUpdate}
+                        onSubmit={handleCreate}
                         loading={loading}
                         error={error}
                     />
@@ -57,4 +48,5 @@ const EditUser = () => {
     );
 };
 
-export default EditUser;
+export default CreateUser;
+

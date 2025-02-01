@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Navbar } from "../../components/common/Navbar";
 
 
@@ -6,11 +6,7 @@ import { Navbar } from "../../components/common/Navbar";
 
 function Home() {
 
- const [texto, botonpusheado]=useState("Se viene algo chivo! 👾✨");
 
- const cambiarTexto = () => {
-  botonpusheado("No hay nada que mostrar aún 😅");
-};
 
   return (
     <>
@@ -23,13 +19,9 @@ function Home() {
           ¡Aquí va nuestra app Full Stack! 🚀
         </h1>
         <p className="mt-4 text-lg md:text-xl opacity-90">
-          {texto}
+        ¡Bienvenido/a!
         </p>
-        <button
-        onClick={cambiarTexto}
-        className="mt-6 px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105">
-          Descubre más
-        </button>
+    
       </header>
 
       {/* Team */}
